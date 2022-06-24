@@ -1,0 +1,25 @@
+{
+  "name": "find_your_mentor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArturRushanyan/find_your_mentor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArturRushanyan/find_your_mentor/issues"
+  },
+  "homepage": "https://github.com/ArturRushanyan/find_your_mentor#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.18"
+  }
+}
