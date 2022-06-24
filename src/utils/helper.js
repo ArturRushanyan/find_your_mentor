@@ -32,6 +32,17 @@ const hashingPassword = (password) => {
     });
 };
 
+const comparePassword = (password, hashedPassword) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, hashedPassword, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
 const generateAuthToken = (userId) => {
     return new Promise((resolve, reject) => {
         if (!userId) {
@@ -45,8 +56,16 @@ const generateAuthToken = (userId) => {
     });
 };
 
+const verifyToken = (token) => {
+    return new Promise((resolve) => {
+        resolve(JWT.verify(token, config.JWT_SECRET_KEY));
+    });
+};
+
 module.exports = {
     prepareData,
     hashingPassword,
+    comparePassword,
     generateAuthToken,
+    verifyToken
 }

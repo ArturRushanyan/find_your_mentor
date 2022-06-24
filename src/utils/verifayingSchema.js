@@ -21,6 +21,11 @@ module.exports = {
         ...required_fields,
         password: Joi.string().required().min(6).max(20).trim(),
         confirmPassword: Joi.ref('password'),
+    }),
+
+    Login: Joi.object().keys({
+        email: Joi.string().required().min(5).max(40).trim(),
+        password: Joi.string().required().min(6).max(20).trim(),
     })
 
 };

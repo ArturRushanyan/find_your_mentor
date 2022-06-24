@@ -52,7 +52,37 @@ SignUp = (req, res) => {
     });
 };
 
+Login = (req, res) => {
+    let user;
+
+    authService.findUserByEmail(req.body.email).then(result => {
+        if (!result) {
+            throw  { status: 404, message: constants.NOT_EXISTS('user') };
+        }
+        user = result;
+
+        return helper.comparePassword(req.body.password, user.password);
+    }).then((isMatch) => {
+        if (!isMatch) {
+            throw  { status: 403, message: constants.INCORRECT_PASSWORD };
+        }
+
+        return helper.generateAuthToken(user._id)
+    }).then(token => {
+
+        return res.status(200).json({
+            success: true,
+            access_token: token,
+            user,
+        });
+
+    }).catch(err => {
+        return Error.errorHandling(res, 400, err)
+    })
+};
+
 module.exports = {
     SignUp,
+    Login,
 }
 
