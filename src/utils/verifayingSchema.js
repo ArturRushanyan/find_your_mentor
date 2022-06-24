@@ -26,6 +26,11 @@ module.exports = {
     Login: Joi.object().keys({
         email: Joi.string().required().min(5).max(40).trim(),
         password: Joi.string().required().min(6).max(20).trim(),
+    }),
+
+    // At this point we are waiting for all data related with user object
+    updateUserData: Joi.object().keys({
+        ...required_fields,
     })
 
 };

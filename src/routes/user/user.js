@@ -9,5 +9,6 @@ const userController = require('./user.controller')
 const router = express.Router();
 
 router.get('/me', authentication.isAuthenticated, userController.getMe);
+router.post('/me', authentication.isAuthenticated, validateWithJoi.updateUserData, userController.updateUserPersonalInformation);
 
 module.exports = router;

@@ -31,10 +31,23 @@ const Login = (req, res, next) => {
     next();
 };
 
+const updateUserData = (req, res, next) => {
+    const schema = Schema.updateUserData;
+    const result = schema.validate(req.body);
+
+    if (result.error) {
+        return Error.errorHandling(res, 422, {message: Constants.VALIDATION_ERROR, serverError: result.error.details})
+    }
+
+    req.body = ManipulateData.prepareData(req.body, result.value, false)
+    next();
+}
+
 
 module.exports = {
     Registration,
-    Login
+    Login,
+    updateUserData
 }
 
 

@@ -7,12 +7,12 @@ const helper = require('../../utils/helper')
 const constants =  require('../../utils/const_messages');
 
 // Services
-const authService = require('../../db_services/auth_services')
+const userService = require('../../db_services/user_services')
 
 SignUp = (req, res) => {
     const user = req.body;
     let newUser;
-    authService.findUserByEmail(req.body.email).then((user) => {
+    userService.findUserByEmail(req.body.email).then((user) => {
         if(user) {
             throw { status: 409, message: constants.ALREADY_EXISTS('User') };
         }
@@ -33,7 +33,7 @@ SignUp = (req, res) => {
             password: hasedPassword,
         };
 
-        return authService.saveUser(userInstance);
+        return userService.saveUser(userInstance);
     }).then((createdUser) => {
         if (!createdUser) {
             throw { status: 500, message: constants.SOMETHING_WENT_WRONG };
@@ -55,7 +55,7 @@ SignUp = (req, res) => {
 Login = (req, res) => {
     let user;
 
-    authService.findUserByEmail(req.body.email).then(result => {
+    userService.findUserByEmail(req.body.email).then(result => {
         if (!result) {
             throw  { status: 404, message: constants.NOT_EXISTS('user') };
         }

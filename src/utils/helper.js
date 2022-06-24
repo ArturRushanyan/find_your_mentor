@@ -5,7 +5,7 @@ const constants = require('../utils/const_messages')
 
 
 // This function return updated and validated data for request body
-const prepareData = (body, updated_data) => {
+const prepareData = (body, updated_data, registrationFlow=true) => {
     body.name = updated_data.name;
     body.surname = updated_data.surname;
     body.type = updated_data.type;
@@ -16,7 +16,11 @@ const prepareData = (body, updated_data) => {
     body.education = updated_data.education;
     body.experience = updated_data.experience;
     body.about = updated_data.about;
-    body.password = updated_data.password
+    // registrationFlow is "true" when user trying to register in system
+    // registrationFlow is "false" when user is updating his personal information
+    if (registrationFlow) {
+        body.password = updated_data.password
+    }   
 
     return body;
 }

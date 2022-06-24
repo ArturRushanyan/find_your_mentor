@@ -13,9 +13,15 @@ const getUserById = (id) => {
     return userModel.findById(id);
 }
 
+
+const updateUserCertainInformation = (newInfo) => {
+    return userModel.findOneAndUpdate({email: newInfo.email}, { $set: newInfo }, { new: true });
+}
+
 module.exports = {
     findUserByEmail,
     saveUser,
     getUserById,
+    updateUserCertainInformation
 }
 
