@@ -12,8 +12,20 @@ const getMe = (req, res) => {
 
 const updateUserPersonalInformation = (req, res) => {
     const newInformation = req.body
+    const loggedInUser = req.user
 
-    userService.updateUserCertainInformation(newInformation).then(user => {
+
+    userService.findUserByEmail(newInformation.email)
+    .then(user => {
+        // Checking if user updated his email and that email is exists in the system throwing error response
+        if (user) {
+            throw { 
+                code: 409,
+                msg: `User already exists with this email address ${newInformation.email}`
+            }
+        }
+        return userService.updateUserCertainInformation(newInformation, loggedInUser.email)
+    }).then(user => {
         return res.status(200).json({
             "user": user
         })
@@ -22,7 +34,32 @@ const updateUserPersonalInformation = (req, res) => {
     })
 }
 
+const getUserById = (req, res) => {
+    const targetUserId = req.params.id
+    userService.getUserById(targetUserId)
+    .then(user => {
+        if (!user) {
+            return res.status(404).json({
+                msg: `cannot find user by ${targetUserId} id`
+            })
+        }
+
+        return res.status(200).json({
+            user: user
+        })
+
+    }).catch(err => {
+        return Error.errorHandling(res, 400, err)
+    })
+};
+
+const getUsers = (req, res) => {
+    // query
+}
+
 module.exports = {
     getMe,
-    updateUserPersonalInformation
+    updateUserPersonalInformation,
+    getUserById,
+    getUsers
 }

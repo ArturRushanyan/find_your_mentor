@@ -14,8 +14,17 @@ const getUserById = (id) => {
 }
 
 
-const updateUserCertainInformation = (newInfo) => {
-    return userModel.findOneAndUpdate({email: newInfo.email}, { $set: newInfo }, { new: true });
+const updateUserCertainInformation = (newInfo, loggedInUserEmail) => {
+    return userModel.findOneAndUpdate({
+        email: loggedInUserEmail
+    }, 
+    { 
+        $set: newInfo, 
+        updatedAt: Date.now() 
+    }, 
+    { 
+        new: true 
+    });
 }
 
 module.exports = {

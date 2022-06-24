@@ -10,5 +10,6 @@ const router = express.Router();
 
 router.get('/me', authentication.isAuthenticated, userController.getMe);
 router.post('/me', authentication.isAuthenticated, validateWithJoi.updateUserData, userController.updateUserPersonalInformation);
+router.get('/:id', authentication.isAuthenticated, userController.getUserById);
 
 module.exports = router;
