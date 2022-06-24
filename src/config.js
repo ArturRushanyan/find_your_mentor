@@ -9,6 +9,9 @@ const config = {
     DB: {
         url: `mongodb://${db_host}:${db_port}/${db_name}`,
     },
+    JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+    user_working_filed_enum: process.env.WORKING_FIELD || [],
+    user_type_enum: process.env.USER_TYPE || []
 };
 
 module.exports = config;
