@@ -4,6 +4,7 @@ const logger  = require('morgan');
 const mongoose =  require('mongoose');
 
 const config = require('./config');
+const routes = require('../src/routes/index');
 
 const app = express();
 app.use(logger('dev'));
@@ -19,6 +20,8 @@ mongoose.connect(config.DB.url, {
     console.log('err ', err);
     process.exit();
 });
+
+routes(app);
 
 app.listen(config.port, () => {
     console.log(`Server is up on port: ${config.port}`);

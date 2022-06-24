@@ -27,8 +27,8 @@ const userSchema = new Schema({
     },
     working_field: {
         type: String,
-        enum: user_enums.user_working_filed_enum,
-        default: user_enums.user_working_filed_enum[0]
+        enum: user_enums.working_field_enum,
+        default: user_enums.working_field_enum[0]
     },
     plans: {
         type: String,
