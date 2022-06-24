@@ -8,7 +8,7 @@ const constants = require('../utils/const_messages')
 const prepareData = (body, updated_data, registrationFlow=true) => {
     body.name = updated_data.name;
     body.surname = updated_data.surname;
-    body.type = updated_data.type;
+    body.user_type = updated_data.user_type;
     body.position = updated_data.position;
     body.working_field = updated_data.working_field;
     body.plans = updated_data.plans;
@@ -16,6 +16,7 @@ const prepareData = (body, updated_data, registrationFlow=true) => {
     body.education = updated_data.education;
     body.experience = updated_data.experience;
     body.about = updated_data.about;
+    
     // registrationFlow is "true" when user trying to register in system
     // registrationFlow is "false" when user is updating his personal information
     if (registrationFlow) {

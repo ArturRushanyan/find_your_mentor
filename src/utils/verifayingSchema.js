@@ -6,7 +6,7 @@ const user_enums = require('../config')
 const required_fields = {
     name: Joi.string().required().min(5).max(40),
     surname: Joi.string().required().min(5).max(40).trim(),
-    type: Joi.string().valid(...user_enums.user_type_enum),
+    user_type: Joi.string().valid(...user_enums.user_type_enum),
     position: Joi.string().required().min(5).max(40).trim(),
     working_field: Joi.string().valid(...user_enums.working_field_enum),
     plans: Joi.string().required().min(5).max(100).trim(),

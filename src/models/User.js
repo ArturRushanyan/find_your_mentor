@@ -15,7 +15,7 @@ const userSchema = new Schema({
         required: true,
         trim: true
     },
-    type: {
+    user_type: {
         type: String,
         enum : user_enums.user_type_enum,
         default: user_enums.user_type_enum[0]
