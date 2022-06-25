@@ -24,7 +24,7 @@ const prepareData = (body, updated_data, registrationFlow=true) => {
     }   
 
     return body;
-}
+};
 
 const hashingPassword = (password) => {
     return new Promise((resolve, reject) => {
@@ -67,10 +67,24 @@ const verifyToken = (token) => {
     });
 };
 
+
+const filterQueryParameters = (accessibleQueryKeys, reqQuery) => {
+    let tmp = {}
+
+    accessibleQueryKeys.forEach(key => {
+        if (reqQuery.hasOwnProperty(key)) {
+            tmp[key] = reqQuery[key]
+        }
+    })
+    
+    return tmp
+};
+
 module.exports = {
     prepareData,
     hashingPassword,
     comparePassword,
     generateAuthToken,
-    verifyToken
+    verifyToken,
+    filterQueryParameters
 }

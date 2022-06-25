@@ -25,12 +25,17 @@ const updateUserCertainInformation = (newInfo, loggedInUserEmail) => {
     { 
         new: true 
     });
-}
+};
+
+const getFilteredUsers = (query) => {
+    return userModel.find(query)
+};
 
 module.exports = {
     findUserByEmail,
     saveUser,
     getUserById,
-    updateUserCertainInformation
+    updateUserCertainInformation,
+    getFilteredUsers
 }
 

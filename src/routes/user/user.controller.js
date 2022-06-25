@@ -2,6 +2,9 @@
 const userService = require('../../db_services/user_services')
 const Error = require('../../utils/errors')
 
+const helper = require('../../utils/helper')
+const config  = require('../../config')
+
 const getMe = (req, res) => {
     // here we sending as respnse req.user becouse at 
     // JWT authentication phase we find the user and set it in the request object as property 
@@ -53,9 +56,23 @@ const getUserById = (req, res) => {
     })
 };
 
-const getUsers = (req, res) => {
-    // query
-}
+const getUsers = async (req, res) => {
+    
+    // Checking have a query parameters in request or not
+    const isEmptyQuery = Object.keys(req.query).length === 0;
+    try {
+        if (isEmptyQuery) {
+            let users = await userService.getAllUsers();
+            return res.status(200).json({ users })
+        } else {
+            const queryParameters = await helper.filterQueryParameters(config.accessibleQueryParameters, req.query)
+            const usersList = await userService.getFilteredUsers(queryParameters)
+            return res.status(200).send({usersList})
+        }
+    } catch(err) {
+        return Error.errorHandling(res, 400, err.message)
+    }
+};
 
 module.exports = {
     getMe,
