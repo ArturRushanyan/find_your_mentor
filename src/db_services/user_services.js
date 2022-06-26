@@ -1,3 +1,4 @@
+const moment = require('moment');
 const userModel = require('../models/User');
 
 const findUserByEmail = (email) => {
@@ -20,12 +21,16 @@ const updateUserCertainInformation = (newInfo, loggedInUserEmail) => {
     }, 
     { 
         $set: newInfo, 
-        updatedAt: Date.now() 
+        updatedAt: moment(new Date()).format('YYYY-MM-DD')
     }, 
     { 
-        new: true 
+        new: true
     });
-};
+}
+
+const getAllUsers = () => {
+    return userModel.find();
+}
 
 const getFilteredUsers = (query) => {
     return userModel.find(query)
@@ -36,6 +41,6 @@ module.exports = {
     saveUser,
     getUserById,
     updateUserCertainInformation,
+    getAllUsers,
     getFilteredUsers
-}
-
+};

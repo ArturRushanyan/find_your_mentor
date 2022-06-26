@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require("moment")
 const user_enums = require('../config')
 
 const Schema = mongoose.Schema;
@@ -7,16 +8,19 @@ const userId = mongoose.Schema.Types.ObjectId;
 const userSchema = new Schema({
     name: {
         type: String,
+        index: true,
         required: true,
         trim: true
     },
     surname:{
         type: String,
+        index: true,
         required: true,
         trim: true
     },
     user_type: {
         type: String,
+        index: true,
         enum : user_enums.user_type_enum,
         default: user_enums.user_type_enum[0]
     },
@@ -39,6 +43,7 @@ const userSchema = new Schema({
         required: true,
         unique: true,
         lowercase: true,
+        index: true,
         trim: true,
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     },
@@ -60,12 +65,13 @@ const userSchema = new Schema({
         trim: true,
     },
     createdAt: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        index: true,
+        default: moment(new Date()).format('YYYY-MM-DD')
     },
     updatedAt: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: moment(new Date()).format('YYYY-MM-DD')
     }
 });
 

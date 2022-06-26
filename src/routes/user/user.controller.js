@@ -1,59 +1,58 @@
 
 const userService = require('../../db_services/user_services')
-const Error = require('../../utils/errors')
-
+const errorHandler = require('../../utils/errors')
 const helper = require('../../utils/helper')
 const config  = require('../../config')
+const const_maeesage = require('../../utils/const_messages');
+
 
 const getMe = (req, res) => {
-    // here we sending as respnse req.user becouse at 
-    // JWT authentication phase we find the user and set it in the request object as property 
+    // Here we sending as response req.user because at
+    // JWT authentication phase we found the user and set it in the request object as property
     return res.status(200).json({
         user: req.user
     })
 }
 
-const updateUserPersonalInformation = (req, res) => {
+const updateUserPersonalInformation = async (req, res) => {
     const newInformation = req.body
     const loggedInUser = req.user
 
+    try {
+        const user = await userService.findUserByEmail(newInformation.email);
 
-    userService.findUserByEmail(newInformation.email)
-    .then(user => {
         // Checking if user updated his email and that email is exists in the system throwing error response
-        if (user) {
-            throw { 
+        if (user && loggedInUser.id !== user.id) {
+            throw {
                 code: 409,
-                msg: `User already exists with this email address ${newInformation.email}`
+                message: const_maeesage.ALREADY_EXISTS_WITH_THIS_EMAIL(newInformation.email)
             }
         }
-        return userService.updateUserCertainInformation(newInformation, loggedInUser.email)
-    }).then(user => {
-        return res.status(200).json({
-            "user": user
-        })
-    }).catch(err => {
-        return Error.errorHandling(res, 400, err)
-    })
+        const updatedUser = await userService.updateUserCertainInformation(newInformation, loggedInUser.email)
+
+        return res.status(200).json({updatedUser})
+
+    } catch(err) {
+        return errorHandler(res, err.code || 400, err)
+    }
 }
 
-const getUserById = (req, res) => {
+const getUserById = async (req, res) => {
     const targetUserId = req.params.id
-    userService.getUserById(targetUserId)
-    .then(user => {
+
+    try {
+        const user = await userService.getUserById(targetUserId)
         if (!user) {
             return res.status(404).json({
-                msg: `cannot find user by ${targetUserId} id`
+                message: const_maeesage.CANNOT_FIND_USER_BY_ID(targetUserId)
             })
         }
 
-        return res.status(200).json({
-            user: user
-        })
+        return res.status(200).json({user})
 
-    }).catch(err => {
-        return Error.errorHandling(res, 400, err)
-    })
+    } catch(err) {
+        return errorHandler(res, 400, err)
+    }
 };
 
 const getUsers = async (req, res) => {
@@ -70,9 +69,9 @@ const getUsers = async (req, res) => {
             return res.status(200).send({usersList})
         }
     } catch(err) {
-        return Error.errorHandling(res, 400, err.message)
+        return errorHandler(res, 400, err)
     }
-};
+}
 
 module.exports = {
     getMe,

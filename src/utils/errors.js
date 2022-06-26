@@ -1,9 +1,5 @@
-function errorHandling(res, code, err) {
-    return res.status(code).json({
-        error: err
-    });
+function errorHandler(res, code, error) {
+    return res.status(code).send({ error: error.message });
 };
 
-module.exports = {
-    errorHandling
-};
+module.exports = errorHandler;

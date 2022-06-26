@@ -12,7 +12,7 @@ const config = {
     JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
     working_field_enum: ['IT', 'Project Management', 'Data Analyst'],
     user_type_enum: ['mentor', 'mentee'],
-    accessibleQueryParameters: ['name', 'surname', 'user_type', 'createdAt'],
+    accessibleQueryParameters: ['name', 'surname', 'user_type', 'createdAt']
 };
 
 module.exports = config;
