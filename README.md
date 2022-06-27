@@ -15,6 +15,13 @@ And run commands below
 
 `npm run dev`
 
+## How to run with docker
+
+You need to have installed `docker` and `docker compose` on your locale machine.
+
+And run commands below
+
+`docker-compose up --build`
 
 ## Postman Collections
 
