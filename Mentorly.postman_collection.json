@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "ab86ef4b-0200-4e53-982d-716fc8195134",
+		"name": "Mentorly",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SingUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test\",\n    \"surname\": \"Test\",\n    \"user_type\": \"mentor\",\n    \"position\": \"test position\",\n    \"working_field\":\"IT\",\n    \"plans\": \"Traveling\",\n    \"email\": \"test@yopmail.com\",\n    \"experience\": \"test experience\",\n    \"education\": \"test education\",\n    \"about\": \"test about\",\n    \"password\": \"Test1234!\",\n    \"confirmPassword\": \"Test1234!\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/auth/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@yopmail.com\",\n    \"password\": \"Test1234!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get current user information",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmI4MzJiNjViMWNmMjUyZDllOWQwOGUiLCJpYXQiOjE2NTYyMzkwOTgsImV4cCI6MTY1NjI0MjY5OH0.BfhGnYOnPeBnZnoeZklNcH74HT97tzxUJ068k5C-Thc",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/v1/users/me",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update current user information",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmI4MzJiNjViMWNmMjUyZDllOWQwOGUiLCJpYXQiOjE2NTYyNDE0MzMsImV4cCI6MTY1NjI0NTAzM30.zLYCU-VG9862ApYbYAPCtlGdmnq2MB6doqr1bCalckU",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test1\",\n    \"surname\": \"Test1\",\n    \"user_type\": \"mentor\",\n    \"position\": \"test position1\",\n    \"working_field\":\"IT\",\n    \"plans\": \"Traveling 1\",\n    \"email\": \"test@yopmail.com\",\n    \"experience\": \"test experience1\",\n    \"education\": \"test education1\",\n    \"about\": \"test about1\",\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/users/me",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmI4MzJiNjViMWNmMjUyZDllOWQwOGUiLCJpYXQiOjE2NTYyMzkwOTgsImV4cCI6MTY1NjI0MjY5OH0.BfhGnYOnPeBnZnoeZklNcH74HT97tzxUJ068k5C-Thc",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/v1/users/{{user_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{user_id}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmI4MzJiNjViMWNmMjUyZDllOWQwOGUiLCJpYXQiOjE2NTYyMzkwOTgsImV4cCI6MTY1NjI0MjY5OH0.BfhGnYOnPeBnZnoeZklNcH74HT97tzxUJ068k5C-Thc",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/v1/users?anme={{name}}&surname={{surname}}&user_type={{user_type}}&createdAt={{createdAt}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "anme",
+							"value": "{{name}}"
+						},
+						{
+							"key": "surname",
+							"value": "{{surname}}"
+						},
+						{
+							"key": "user_type",
+							"value": "{{user_type}}"
+						},
+						{
+							"key": "createdAt",
+							"value": "{{createdAt}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_id",
+			"value": "62b8364b45cf0fd253c03c51",
+			"type": "default"
+		},
+		{
+			"key": "name",
+			"value": "Test",
+			"type": "default"
+		},
+		{
+			"key": "surname",
+			"value": "Test",
+			"type": "default"
+		},
+		{
+			"key": "user_type",
+			"value": "mentor",
+			"type": "default"
+		},
+		{
+			"key": "createdAt",
+			"value": "2022-06-27",
+			"type": "default"
+		}
+	]
+}
